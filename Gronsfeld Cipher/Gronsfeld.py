@@ -12,10 +12,10 @@ trigram = ngram_score('../Utils/trigrams.txt')
 #ctext = 'ujh wfeuiu mhc egwisolrfu ksx odrz roedgv ibek pfvwis uksvng ff ukmgvhh'
 ctext = input("\nEnter cipher text: ")
 
-ctext = re.sub(r'[^A-Z]','',ctext.upper())
+ctext = re.sub(r'[^a-z]','',ctext.upper())
 
 class nbest(object):
-    def __init__(self,N=1000):
+    def __init__(self,N=10000):
         self.store = []
         self.N = N
         
@@ -34,7 +34,7 @@ N=100
 for KLEN in range(3,20):
     rec = nbest(N)
 
-    for i in permutations('0123456789',3):
+    for i in permutations('123456789',3):
         key = ''.join(i) + '0'*(KLEN-len(i))
         key = [int(i) for i in list(key)]
         pt = Gronsfeld(list(key)).decipher(ctext)
